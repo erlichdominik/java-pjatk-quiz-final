@@ -1,88 +1,90 @@
-import { Route } from '@vaadin/router';
-import Role from './generated/com/example/application/data/Role';
-import { appStore } from './stores/app-store';
+import {Route} from '@vaadin/router';
+import Role from './generated/com/pjatk/quiz/app/user/Role';
+import {appStore} from './stores/app-store';
 import './views/helloworld/hello-world-view';
 import './views/main-layout';
+import './views/home/home-view';
+import './views/choosequiz/choose-quiz-view'
 
 export type ViewRoute = Route & {
-  title?: string;
-  icon?: string;
-  requiresLogin?: boolean;
-  rolesAllowed?: Role[];
-  children?: ViewRoute[];
+    title?: string;
+    icon?: string;
+    requiresLogin?: boolean;
+    rolesAllowed?: Role[];
+    children?: ViewRoute[];
 };
 
 export const hasAccess = (route: Route) => {
-  const viewRoute = route as ViewRoute;
-  if (viewRoute.requiresLogin && !appStore.loggedIn) {
-    return false;
-  }
+    const viewRoute = route as ViewRoute;
+    if (viewRoute.requiresLogin && !appStore.loggedIn) {
+        return false;
+    }
 
-  if (viewRoute.rolesAllowed) {
-    return viewRoute.rolesAllowed.some((role) => appStore.isUserInRole(role));
-  }
-  return true;
+    if (viewRoute.rolesAllowed) {
+        return viewRoute.rolesAllowed.some((role) => appStore.isUserInRole(role));
+    }
+    return true;
 };
 
 export const views: ViewRoute[] = [
-  // place routes below (more info https://hilla.dev/docs/routing)
-  {
-    path: '',
-    component: 'hello-world-view',
-    requiresLogin: true,
-    icon: '',
-    title: '',
-    action: async (_context, _command) => {
-      if (!hasAccess(_context.route)) {
-        return _command.redirect('login');
-      }
-      return;
+    // place routes below (more info https://hilla.dev/docs/routing)
+    {
+        path: '',
+        component: 'home-view',
+        requiresLogin: false,
+        icon: 'la la-globe',
+        title: "Home"
     },
-  },
-  {
-    path: 'hello',
-    component: 'hello-world-view',
-    requiresLogin: true,
-    icon: 'la la-globe',
-    title: 'Hello World',
-    action: async (_context, _command) => {
-      if (!hasAccess(_context.route)) {
-        return _command.redirect('login');
-      }
-      return;
+    {
+        path: 'choose-quiz',
+        component: 'choose-quiz-view',
+        requiresLogin: true,
+        title: "choose quiz!"
     },
-  },
-  {
-    path: 'about',
-    component: 'about-view',
-    requiresLogin: true,
-    icon: 'la la-file',
-    title: 'About',
-    action: async (_context, _command) => {
-      if (!hasAccess(_context.route)) {
-        return _command.redirect('login');
-      }
-      await import('./views/about/about-view');
-      return;
+    {
+        path: 'hello',
+        component: 'hello-world-view',
+        requiresLogin: true,
+        icon: 'la la-globe',
+        title: 'Hello World',
+        action: async (_context, _command) => {
+            if (!hasAccess(_context.route)) {
+                return _command.redirect('login');
+            }
+            return;
+        },
     },
-  },
+    {
+        path: 'about',
+        component: 'about-view',
+        requiresLogin: true,
+        icon: 'la la-file',
+        title: 'About',
+        action: async (_context, _command) => {
+            if (!hasAccess(_context.route)) {
+                return _command.redirect('login');
+            }
+            await import('./views/about/about-view');
+            return;
+        },
+    },
 ];
 export const routes: ViewRoute[] = [
-  {
-    path: 'login',
-    component: 'login-view',
-    requiresLogin: true,
-    icon: '',
-    title: 'Login',
-    action: async (_context, _command) => {
-      await import('./views/login/login-view');
-      return;
+    {
+        path: 'login',
+        component: 'login-view',
+        requiresLogin: true,
+        icon: '',
+        title: 'Login',
+        action: async (_context, _command) => {
+            await import('./views/login/login-view');
+            return;
+        },
     },
-  },
 
-  {
-    path: '',
-    component: 'main-layout',
-    children: [...views],
-  },
+    {
+        path: '',
+        component: 'main-layout',
+        children: [...views],
+    },
 ];

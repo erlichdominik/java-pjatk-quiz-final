@@ -1,4 +1,4 @@
-package com.example.application.endpoints.helloworld;
+package com.pjatk.quiz.endpoints.helloworld;
 
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.Endpoint;

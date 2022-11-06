@@ -1,6 +1,6 @@
 import { RouterLocation } from '@vaadin/router';
-import User from 'Frontend/generated/com/example/application/data/entity/User';
-import Role from 'Frontend/generated/com/example/application/data/Role';
+import User from 'Frontend/generated/com/pjatk/quiz/app/user/User';
+import Role from 'Frontend/generated/com/pjatk/quiz/app/user/Role';
 import { UserEndpoint } from 'Frontend/generated/endpoints';
 import { makeAutoObservable } from 'mobx';
 

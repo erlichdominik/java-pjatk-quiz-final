@@ -10,7 +10,7 @@ import '@vaadin/scroller';
 import '@vaadin/tabs';
 import '@vaadin/tabs/vaadin-tab';
 import '@vaadin/vaadin-lumo-styles/vaadin-iconset';
-import User from 'Frontend/generated/com/example/application/data/entity/User';
+import User from 'Frontend/generated/com/pjatk/quiz/app/user/User';
 import { imageDataUrl } from 'Frontend/util';
 import { html, render } from 'lit';
 import { customElement } from 'lit/decorators.js';

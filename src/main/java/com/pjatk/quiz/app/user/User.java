@@ -1,17 +1,11 @@
-package com.example.application.data.entity;
+package com.pjatk.quiz.app.user;
 
-import com.example.application.data.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pjatk.quiz.app.sharedkernel.AbstractEntity;
 import dev.hilla.Nonnull;
+
+import javax.persistence.*;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Lob;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "application_user")
@@ -31,6 +25,16 @@ public class User extends AbstractEntity {
     @Lob
     @Column(length = 1000000)
     private byte[] profilePicture;
+    @OneToMany(mappedBy = "user")
+    private Set<Walkthrough> walkthroughs;
+
+    public Set<Walkthrough> getWalkthroughs() {
+        return walkthroughs;
+    }
+
+    public void setWalkthroughs(Set<Walkthrough> walkthroughs) {
+        this.walkthroughs = walkthroughs;
+    }
 
     public String getUsername() {
         return username;

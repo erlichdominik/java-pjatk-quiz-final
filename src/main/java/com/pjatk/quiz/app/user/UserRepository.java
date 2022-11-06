@@ -1,8 +1,8 @@
-package com.example.application.data.service;
+package com.pjatk.quiz.app.user;
 
-import com.example.application.data.entity.User;
-import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
 
